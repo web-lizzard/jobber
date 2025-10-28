@@ -1,0 +1,4 @@
+@AUTH_URL=http://localhost:3000
+
+### TESTING THE API
+GET {{AUTH_URL}}/api/
