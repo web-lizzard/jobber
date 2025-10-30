@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: jobber
+      POSTGRES_PASSWORD: jobber
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      DB_USER: jobber
+      DB_PASSWORD: jobber
+      DB_NAME: jobber
+      DB_PORT: 5432
+      DB_HOST: db
+volumes:
+  postgres_data:
