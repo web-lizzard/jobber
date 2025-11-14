@@ -45,21 +45,23 @@
       "executor": "nx:noop"
     },
     "serve": {
-      "continuous": true,
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "dependsOn": ["build:development"],
       "options": {
-        "buildTarget": "jobber-auth:build",
-        "runBuildTargetDependencies": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "jobber-auth:build:development"
-        },
-        "production": {
-          "buildTarget": "jobber-auth:build:production"
-        }
+        "commands": [
+          {
+            "command": "webpack-cli build --node-env=development --watch",
+            "forwardAllArgs": false,
+            "prefix": "webpack"
+          },
+          {
+            "command": "node --enable-source-maps --watch ../../dist/apps/jobber-auth/main.js",
+            "forwardAllArgs": false,
+            "prefix": "nestjs"
+          }
+        ],
+        "parallel": true,
+        "cwd": "apps/jobber-auth"
       }
     },
     "test": {
