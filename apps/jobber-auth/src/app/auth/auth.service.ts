@@ -6,10 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { User } from '../users/models/user.model';
-
-interface TokenPayload {
-  useId: string;
-}
+import { TokenPayload } from './payloads/token-response.payload';
 
 @Injectable()
 export class AuthService {
